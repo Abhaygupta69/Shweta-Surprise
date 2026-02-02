@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Shweta ❤️</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Floating hearts background */
+    .background-heart {
+      position: fixed;
+      font-size: 24px;
+      color: rgba(255,255,255,0.3);
+      animation: floatHeart linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(110vh) rotate(0deg); opacity:0; }
+      10% { opacity:1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity:0; }
+    }
+
+    /* Start Screen */
+    #startScreen {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
+      z-index: 10;
+    }
+
+    #startScreen img {
+      width: 250px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      animation: zoomFloat 6s ease forwards;
+      margin-bottom: 25px;
+    }
+
+    #startScreen h1, #startScreen p, #startScreen button {
+      opacity: 0;
+      animation: fadeInText 2s forwards;
+    }
+
+    #startScreen h1 { animation-delay: 1s; font-size: 48px; font-family: 'Playfair Display', serif; color: white; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
+    #startScreen p { animation-delay: 2s; font-size: 22px; color: white; margin-bottom: 25px; text-shadow: 0 3px 10px rgba(0,0,0,0.5); }
+    #startScreen button { animation-delay: 3s; font-size: 20px; padding: 14px 30px; border: none; border-radius: 40px; cursor: pointer; background: linear-gradient(135deg, #ff4d6d, #ff758c); color: white; box-shadow: 0 8px 25px rgba(255,77,109,0.45); transition: all 0.3s ease; }
+
+    #startScreen button:hover { transform: translateY(-3px); }
+
+    @keyframes zoomFloat {
+      0% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.1) translateY(-15px); }
+      100% { transform: scale(1.15) translateY(0); }
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card content */
+    .card {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      padding: 35px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      max-width: 480px;
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+    }
+
+    h1, h2 { font-family: 'Playfair Display', serif; color: #ff4d6d; }
+    p { font-size: 17px; color: #444; line-height: 1.5; }
+    button.btn { font-size: 16px; padding: 12px 28px; border: none; border-radius: 30px; cursor: pointer; margin: 10px; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #ff4d6d, #ff758c); color: white; box-shadow: 0 8px 20px rgba(255,77,109,0.45); }
+    button.btn:hover { transform: translateY(-2px); }
+    #no { background: #eee; position: absolute; }
+
+    .heart { font-size: 42px; animation: float 2s infinite ease-in-out; margin-bottom: 10px; }
+
+    .video-box { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 15px; }
+    video { width: 100%; display: block; }
+    .video-text { position: absolute; bottom: 15px; width: 100%; text-align: center; color: white; font-family: 'Playfair Display', serif; font-size: 22px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); opacity: 0; animation: fadeText 6s forwards; }
+
+    #musicToggle {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, #ff4d6d, #ff758c);
+      color: white; font-size: 26px; display: none;
+      align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      animation: pulse 2s infinite; z-index: 15;
+    }
+
+    .falling-heart {
+      position: fixed; top: -20px; font-size: 24px; color: #ff4d6d;
+      z-index: 999; animation-name: fallHeart; animation-timing-function: linear;
+    }
+
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);} }
+    @keyframes fadeText { 0%{opacity:0;}30%{opacity:1;}80%{opacity:1;}100%{opacity:0;} }
+    @keyframes fallHeart { 0%{transform:translateY(0) rotate(0deg);opacity:1;} 100%{transform:translateY(110vh) rotate(360deg);opacity:0;} }
+
+    /* YES screen */
+    #yesScreen {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background: linear-gradient(135deg,#ff758c,#ff7eb3);
+      color:white;
+      text-align:center;
+      font-family:'Playfair Display', serif;
+      display: none;
+      z-index: 5;
+    }
+
+    #yesScreen h1 { font-size: 54px; margin-bottom: 20px; }
+    #yesScreen p { font-size: 26px; margin-bottom: 10px; }
+    #yesScreen .small { font-size:20px; font-family:Poppins; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Background music -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Music toggle -->
+  <div id="musicToggle" onclick="toggleMusic()">❤️</div>
+
+  <!-- Floating hearts background -->
+  <script>
+    // create 20 subtle hearts in background
+    for(let i=0;i<20;i++){
+      const heart = document.createElement('div');
+      heart.className = 'background-heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random()*100+'vw';
+      heart.style.fontSize = (Math.random()*30+10)+'px';
+      heart.style.animationDuration = (Math.random()*10+5)+'s';
+      heart.style.animationDelay = Math.random()*5+'s';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Fullscreen start screen -->
+  <div id="startScreen">
+    <img src="9594.jpeg" alt="Shweta ❤️" id="startPhoto">
+    <h1 id="startTitle">Hey Shweta…</h1>
+    <p id="startText">Are you ready?</p>
+    <button id="startBtn" onclick="start()">Slide ➡️</button>
+  </div>
+
+  <!-- Main card content -->
+  <div class="card" id="card">
+    <div class="heart">❤️</div>
+    <h1>Hey Shweta…</h1>
+    <p>(Yes, you. Jerry.)</p>
+    <p>I want to show you something special ✨</p>
+    <button class="btn" onclick="next()">Okay 😌</button>
+  </div>
+
+  <!-- YES screen -->
+  <div id="yesScreen">
+    <h1>SHE SAID YES 💖</h1>
+    <p>Shweta ❤️ Abhay</p>
+    <p class="small">Since 25th August 2022 ❤️</p>
+  </div>
+
+  <script>
+    let step = 0;
+
+    function start() {
+      document.getElementById("startScreen").style.display = "none";
+      const card = document.getElementById("card");
+      card.style.display = "block";
+
+      const music = document.getElementById("bgMusic");
+      music.volume = 0.4;
+      music.play();
+      document.getElementById("musicToggle").style.display = "flex";
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicToggle");
+      if (music.paused) { music.play(); btn.textContent="❤️"; } 
+      else { music.pause(); btn.textContent="💔"; }
+    }
+
+    function next() {
+      const card = document.getElementById("card");
+
+      const screens = [
+        `
+        <div class="heart">✨</div>
+        <h1>Before anything else…</h1>
+        <p>Do you know how special you are to me?</p>
+        <button class="btn" onclick="next()">Tell me 😌</button>
+        `,
+        `
+        <div class="video-box">
+          <video autoplay muted playsinline id="memVideo">
+            <source src="memories.mp4" type="video/mp4">
+          </video>
+          <div class="video-text">Every moment with you means everything ❤️</div>
+        </div>
+        <button class="btn" onclick="next()">Continue 🥹</button>
+        `,
+        `
+        <h1>Shweta…</h1>
+        <p>Every laugh, every memory — I want a lifetime of them.</p>
+        <p><strong>— Abhay</strong></p>
+        <button class="btn" onclick="next()">Okay… ❤️</button>
+        `,
+        `
+        <h2>Will you be my girlfriend?</h2>
+        <button class="btn" onclick="yesClick()">Yes 💖</button>
+        <button id="no" onmouseover="moveNo()">No 🙈</button>
+        `
+      ];
+
+      card.innerHTML = screens[step];
+
+      if(step === 1){
+        const video=document.getElementById("memVideo");
+        video.muted = true;
+        video.play().catch(()=>{});
+      }
+
+      step++;
+    }
+
+    function yesClick() {
+      document.getElementById("card").style.display="none";
+      const yesScreen = document.getElementById("yesScreen");
+      yesScreen.style.display="flex";
+
+      // Falling kisses
+      setInterval(() => {
+        const kiss = document.createElement("div");
+        kiss.className = "falling-heart";
+        kiss.style.left = Math.random() * 100 + "vw";
+        kiss.style.fontSize = (Math.random() * 30 + 20) + "px";
+        kiss.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        kiss.textContent = "💋";
+        document.body.appendChild(kiss);
+        setTimeout(()=>kiss.remove(),6000);
+      },150);
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      noBtn.style.left = Math.random()*(window.innerWidth-120)+"px";
+      noBtn.style.top = Math.random()*(window.innerHeight-60)+"px";
+    }
+  </script>
+
+</body>
+</html>
